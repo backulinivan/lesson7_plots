@@ -1,29 +1,19 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-strfile = open('input.txt', 'r')
-def fileWordlengthCount(f):
-    count = 0
-    lengthsArr = []
-    strArr = f.readlines()
-    for i in range(len(strArr)):
-        for j in range(len(strArr[i])):
-            if strArr[i][j] != ' ' or strArr[i][j] != '\n':
-                count += 1
-            else:
-                lengthsArr.append(count)
-                count = 0    
-    return(lengthsArr)            
 
-objects = fileWordlengthCount(strfile)
-y_pos = np.arange(1, 20, 1)
-partArr = []
-for i in range(1, 20, 1):
-    partArr[i] = objects.count(i)/20
-performance = partArr
+input=open('input.txt','r')
+date=input.read().split()
+date_len=[len(x) for x in date]
+max_len=max(date_len)
+gist_date=[0]*max_len
+for x in date_len:
+    gist_date[x-1]+=1
 
-plt.bar(y_pos, performance, align='center', alpha=0.5)
-plt.ylabel('Доля')
-plt.title('Длина слов')
+y_pos = [1+i for i in range(max_len)]
+plt.bar(y_pos, gist_date, align='center', alpha=0.8)
+plt.xticks(y_pos, y_pos)
+plt.ylabel('Value')
+plt.title('Bar title')
 
 plt.show()
